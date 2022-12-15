@@ -27,7 +27,7 @@ int value_lightSensor = 0;
 int value_humAir = 0;
 int value_tempAir = 0;
 DHT dht(pin_humTempAirSensor, DHT11);
-// state
+
 bool state_Light = 0;
 bool state_pumpDew = 0;
 bool state_roof = 0;
