@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Garden</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- link file javascript -->
+    <!-- create favicon -->
+    <link rel="icon" href="./image/favicon.png" type="image/x-icon">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+</head>
+
+<body>
+    <!-- sidebar -->
+    <div class="sidebar">
+        <img class="logo-details" src="./image/favicon.png" alt="logo Smart Garden">
+        <div class="button-sidebar">
+            <div class="button-sidebar-sub">
+                <a class="button-sidebar-sub-1" href="#"><img src="./image/icon_tempurature.png"
+                        alt="icon_tempurature"></a>
+            </div>
+            <div class="button-sidebar-sub">
+                <a class="button-sidebar-sub-2" href="#"><img src="./image/icon_humidity.png" alt="icon_humidity"></a>
+            </div>
+            <div class="button-sidebar-sub">
+                <a class="button-sidebar-sub-3" href="#"><img src="./image/Icon_brightness.png"
+                        alt="Icon_brightness"></a>
+            </div>
+        </div>
+        <div class="button-auto">
+            <p>AUTO</p>
+            <label class="switch">
+                <input type="checkbox" checked>
+                <span id="js-button0" class="js-button0 slider round"></span>
+            </label>
+        </div>
+        <div class="logo-pioneer">
+            <a href="#"><img src="./image/logo_pioneer.png" alt="logo-pioneer"></a>
+        </div>
+    </div>
+    <!-- end sidebar -->
+    <!-- main -->
+    <div class="main">
+        <div class="humidity">
+            <div id="SOIL_moisture" class="SOIL_moisture">
+                <p style="font-weight:bold; font-size:25px; color:#0084CE; margin-top:1%; margin-right: 7%;">SOIL
+                    MOISTURE (%)</p>
+                <div id="cont" data-pct="100">
+                    <svg id="svg" width="200" height="200" viewPort="0 0 100 100" version="1.1"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <circle r="90" cx="100" cy="100" fill="transparent" stroke-dasharray="565.48"
+                            stroke-dashoffset="0"></circle>
+                        <circle id="bar" r="90" cx="100" cy="100" fill="transparent" stroke-dasharray="565.48"
+                            stroke-dashoffset="0">
+                        </circle>
+                    </svg>
+                </div>
+                <label style="color:#0084ce; font-weight:bold;">
+                    AUTO VALUE:
+                    <input onchange="updateSliderPWM(this)" type="range" max="100" min="0" step="1" value=""
+                        id="percent1" class="percent"
+                        style="display: inline-block; width:50%; height: auto; margin-left: 0%;">
+                    <span id="auto_value1"></span>
+                </label>
+                <div class="button-input" style="width:100%;height:auto; display: inline-block;">
+                    <P
+                        style="display: block; float: left; margin-left:32%; font-weight: bold;font-size: 25px ;color: #0084CE; margin-top: 0px;">
+                        PUMP</P>
+                    <label class="switch" style="display:block; float:right; margin-right: 40%;">
+                        <input type="checkbox" checked placeholder="auto value">
+                        <span id="js-button1" class="js-button slider round" style="background-color:;"></span>
+                    </label>
+                </div>
+                <span class=" chart chart-humSoil">Chart</span>
+            </div>
+
+            <div id="Air_humidity" class="Air_humidity">
+                <p style="font-weight:bold; font-size:25px; color:#0084CE; margin-top:1%; margin-right: 7%;">AIR
+                    HUMIDITY (%)</p>
+                <div id="cont" data-pct="100">
+                    <svg id="svg" width="200" height="200" viewPort="0 0 100 100" version="1.1"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <circle r="90" cx="100" cy="100" fill="transparent" stroke-dasharray="565.48"
+                            stroke-dashoffset="0"></circle>
+                        <circle id="bar" r="90" cx="100" cy="100" fill="transparent" stroke-dasharray="565.48"
+                            stroke-dashoffset="0">
+                        </circle>
+                    </svg>
+                </div>
+                <label style="color:#0084ce; font-weight:bold;">
+                    AUTO VALUE:
+                    <input onchange="updateSliderPWM(this)" type="range" max="100" min="0" step="1" value=""
+                        id="percent2" class="percent"
+                        style="display: inline-block; width:50%; height: auto; margin-left: 0%;">
+                    <span id="auto_value2"></span>
+                </label>
+                <div class="button-input" style="width:100%;height:auto; display: inline-block;">
+                    <P
+                        style="display: block; float: left; margin-left:32%; font-weight: bold;font-size: 25px ;color: #0084CE; margin-top: 0px;">
+                        PUMP</P>
+                    <label class="switch" style="display:block; float:right; margin-right: 40%;">
+                        <input type="checkbox" checked placeholder="auto value">
+                        <span id="js-button2" class="js-button slider round" style="background-color:;"></span>
+                    </label>
+                </div>
+                <span class=" chart chart-humAir">Chart</span>
+            </div>
+
+        </div>
+        <div id="tempurature" class="tempurature">
+            <p style="font-weight:bold; font-size:25px; color:#FF0000; margin-top:1%; margin-right: 7%;">TEMPURATURE
+                (°C)</p>
+            <div id="cont" data-pct="100">
+                <svg id="svg" width="200" height="200" viewPort="0 0 100 100" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <circle r="90" cx="100" cy="100" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="0">
+                    </circle>
+                    <circle id="bar" r="90" cx="100" cy="100" fill="transparent" stroke-dasharray="565.48"
+                        stroke-dashoffset="0" style="stroke:#ff0000 ;">
+                    </circle>
+                </svg>
+            </div>
+            <label style="color:#FF0000; font-weight:bold;">
+                AUTO VALUE:
+                <input onchange="updateSliderPWM(this)" type="range" max="100" min="0" step="1" value="" class="percent"
+                    id="percent3" style="display: inline-block; width:50%; height: auto; margin-left: 0%;">
+                <span id="auto_value3"></span>
+            </label>
+            <div class="button-input" style="width:100%;height:auto; display: inline-block;">
+                <P
+                    style="display: block; float: left; margin-left:25%; font-weight: bold;font-size: 25px ;color: #FF0000; margin-top: 0px;">
+                    CONVERED</P>
+                <label class="switch" style="display:block; float:right; margin-right: 30%;">
+                    <input type="checkbox" checked placeholder="auto value" style="">
+                    <span id="js-button3" class="js-button slider round" style="background-color:;"></span>
+                </label>
+            </div>
+            <span class=" chart chart-tempAir">Chart</span>
+        </div>
+        <div id="light" class="light">
+            <p style="font-weight:bold; font-size:25px; color:#FFC90B; margin-top:1%; margin-right: 7%;">LIGHT (%)</p>
+            <div id="cont" data-pct="100" style="color: #FFC90B;">
+                <svg id="svg" width="200" height="200" viewPort="0 0 100 100" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <circle r="90" cx="100" cy="100" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="0">
+                    </circle>
+                    <circle id="bar" r="90" cx="100" cy="100" fill="transparent" stroke-dasharray="565.48"
+                        stroke-dashoffset="0" style="stroke:#FFC90B;">
+                    </circle>
+                </svg>
+            </div>
+            <label style="color:#FFC90B; font-weight:bold;">
+                AUTO VALUE:
+                <input onchange="updateSliderPWM(this)" type="range" max="100" min="0" step="1" value="" class="percent"
+                    id="percent4" style="display: inline-block; width:50%; height: auto; margin-left: 0%;">
+                <span id="auto_value4"></span>
+            </label>
+            <div class=" button-input" style="width:100%;height:auto; display: inline-block;">
+                <P
+                    style="display: block; float: left; margin-left:25%; font-weight: bold;font-size: 25px ;color: #FFC90B; margin-top: 0px;">
+                    LIGHT BULB</P>
+                <label class="switch" style="display:block; float:right; margin-right: 28%;">
+                    <input type="checkbox" checked placeholder="auto value" style="">
+                    <span id="js-button4" class="js-button round slider" style="background-color:;"></span>
+                </label>
+            </div>
+            <span class=" chart chart-light">Chart</span>
+        </div>
+        <!-- end main -->
+        <div class="modal js-modal1">
+            <div class="modal-container js-modal-container1">
+                <div id="chart-humSoil" class="container"></div>
+            </div>
+        </div>
+        <div class="modal js-modal2">
+            <div class="modal-container js-modal-container2">
+                <div id="chart-humAir" class="container"></div>
+            </div>
+        </div>
+        <div class="modal js-modal3">
+            <div class="modal-container js-modal-container3">
+                <div id="chart-temperature" class="container"></div>
+            </div>
+        </div>
+
+        <div class="modal js-modal4">
+            <div class="modal-container js-modal-container4">
+                <div id="chart-light" class="container"></div>
+            </div>
+        </div>
+        <script src="script.js"></script>
+</body>
+
+</html>
